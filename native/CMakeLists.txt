@@ -10,10 +10,13 @@ endif()
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
+
 pkg_check_modules(WEBKIT2GTK QUIET IMPORTED_TARGET webkit2gtk-4.1)
 if (NOT WEBKIT2GTK_FOUND)
   pkg_check_modules(WEBKIT2GTK REQUIRED IMPORTED_TARGET webkit2gtk-4.0)
 endif()
 
+find_package(CURL REQUIRED)
+
 add_executable(sns_guardian_browser main_linux.cpp)
-target_link_libraries(sns_guardian_browser PRIVATE PkgConfig::GTK3 PkgConfig::WEBKIT2GTK)
+target_link_libraries(sns_guardian_browser PRIVATE PkgConfig::GTK3 PkgConfig::WEBKIT2GTK CURL::libcurl)
